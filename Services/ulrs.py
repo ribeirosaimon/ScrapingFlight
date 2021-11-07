@@ -21,5 +21,16 @@ class CreateUrls:
                     f'{self.base_url}/{europe_arrival}/{br_departure}/{self.args_api}')
         return all_urls
 
+    def especific_flight(self, departure, arrival):
+        return f'{self.base_url}/{departure}/{arrival}/{self.args_api}'
+
     def departure_arrival_url(self):
         return self.departure_url() + self.arrival_url()
+
+    def complet_travel(self):
+        all_urls = []
+        for br_departure in self.america:
+            for europe_arrival in self.europe:
+                all_urls.append(
+                    f'{self.base_url}/{br_departure}/{europe_arrival}?from=SB&di=1-0&reSearch=true')
+        return all_urls
