@@ -1,3 +1,5 @@
 how to run:
 
-sudo docker-compose run app
+- Need create Schema with name: ScrapingFlight
+
+- sudo docker-compose run app
