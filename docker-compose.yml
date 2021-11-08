@@ -3,4 +3,4 @@ services:
   app:
     container_name: ScrapingFlight
     build: .
-    entrypoint: ["python","app.py"]
+    entrypoint: ["python3","app.py"]

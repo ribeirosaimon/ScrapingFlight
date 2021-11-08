@@ -9,10 +9,10 @@ class CalculatorTravel:
         self.arrival = CreateUrls().arrival_url()
         self.departure_arrival = CreateUrls().complet_travel()
 
-    def _best_price(self, list_treavel):
+    def _best_price(self, list_treavel, oneway=False):
         all_travel, price_info = [], []
         for travel in list_treavel:
-            info = ScrapingFlight(travel).get_json_travel_info(oneway=True)
+            info = ScrapingFlight(travel).get_json_travel_info(oneway=oneway)
             all_travel.append(info)
             if info['price'] != 0:
                 price_info.append(info['price'])
@@ -31,8 +31,8 @@ class CalculatorTravel:
 
     def oneway_travel(self):
         result_dict = {}
-        departure = self._best_price(self.departure)
-        arrival = self._best_price(self.arrival)
+        departure = self._best_price(self.departure, oneway=True)
+        arrival = self._best_price(self.arrival, oneway=True)
         result_dict['departure'] = [
             departure['origin'], departure['destination'], departure['month'], departure['time'], departure['airlines']]
         result_dict['arrival'] = [
@@ -41,4 +41,4 @@ class CalculatorTravel:
         return result_dict
 
     def complet_travel(self):
-        return self._best_price(self.departure_arrival)
+        return self._best_price(self.departure_arrival, oneway=False)

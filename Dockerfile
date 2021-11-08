@@ -1,11 +1,9 @@
-FROM python:latest
+FROM python:3
 
-COPY ./requirements.txt /root/requirements.txt
+COPY ./requirements.txt /requirements.txt
+COPY . .
 
-RUN pip install -r /root/requirements.txt
+RUN pip install -r /requirements.txt
+RUN chmod +x /app.py
 
-
-COPY . /root/
-WORKDIR /root
-
-CMD ["python","app.py"]
+CMD ["python","./app.py"]
