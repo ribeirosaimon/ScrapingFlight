@@ -21,9 +21,9 @@ class ScrapingFlight:
             jsonInfos = self._scraping()
             jsonData = jsonInfos['seoFaqParameters']
             info['origin'] = {jsonInfos['origin']
-                              ['name'], jsonInfos['origin']['code']}
+                              ['name']: jsonInfos['origin']['code']}
             info['destination'] = {jsonInfos['destination']
-                                   ['name'], jsonInfos['destination']['code']}
+                                   ['name']: jsonInfos['destination']['code']}
             info['month'] = jsonData['cheapestMonth']
             if oneway:
                 info['travel'] = 'oneway'
@@ -34,7 +34,7 @@ class ScrapingFlight:
                 info['timeReturn'] = jsonData['fastestReturn']
             info['price'] = int(jsonData['cheapestPrice'].replace(
                 'R$', '').replace('.', '').replace(',', '.').strip(' '))
-            info['airlines'] = jsonData['airlinesNames']
+            info['airlines'] = [jsonData['airlinesNames'].split(',')]
             return info
         except:
             info['price'] = 0
