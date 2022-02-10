@@ -1,5 +1,6 @@
-import requests
+from Services.Treatment import StringTreatment
 from bs4 import BeautifulSoup
+import requests
 import json
 
 
@@ -24,14 +25,18 @@ class ScrapingFlight:
                               ['name']: jsonInfos['origin']['code']}
             info['destination'] = {jsonInfos['destination']
                                    ['name']: jsonInfos['destination']['code']}
-            info['month'] = jsonData['cheapestMonth']
+            info['month'] = StringTreatment().month_treatment(
+                jsonData['cheapestMonth'])
             if oneway:
                 info['travel'] = 'oneway'
-                info['time'] = jsonData['fastestGoing']
+                info['time'] = StringTreatment().time_treatment(
+                    jsonData['fastestGoing'])
             else:
                 info['travel'] = 'roundtrip'
-                info['timeGoing'] = jsonData['fastestGoing']
-                info['timeReturn'] = jsonData['fastestReturn']
+                info['timeGoing'] = StringTreatment().time_treatment(
+                    jsonData['fastestGoing'])
+                info['timeReturn'] = StringTreatment().time_treatment(
+                    jsonData['fastestReturn'])
             info['price'] = int(jsonData['cheapestPrice'].replace(
                 'R$', '').replace('.', '').replace(',', '.').strip(' '))
             info['airlines'] = [jsonData['airlinesNames'].split(',')]
