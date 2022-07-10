@@ -9,9 +9,7 @@ if __name__ == '__main__':
     while True:
         result = CalculatorTravel().best_price()
         ConectDb().addDocument(**result)
-        print('------------------------------------')
-        print(datetime.datetime.now())
+        print("I make scraping and i return this: ")
         print(result)
         print('------------------------------------')
-        print('------------------------------------')
-        time.sleep(60)
+        time.sleep(60*5)

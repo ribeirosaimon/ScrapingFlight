@@ -34,9 +34,9 @@ class CalculatorTravel:
         departure = self._best_price(self.departure, oneway=True)
         arrival = self._best_price(self.arrival, oneway=True)
         result_dict['departure'] = [
-            departure['origin'], departure['destination'], departure['month'], departure['time'], departure['airlines']]
+            departure['origin'], departure['destination'], departure['travelAt'], departure['time'], departure['airlines']]
         result_dict['arrival'] = [
-            arrival['origin'], arrival['destination'], arrival['month'], arrival['time'], arrival['airlines']]
+            arrival['origin'], arrival['destination'], arrival['travelAt'], arrival['time'], arrival['airlines']]
         result_dict['price'] = arrival['price'] + departure['price']
         return result_dict
 

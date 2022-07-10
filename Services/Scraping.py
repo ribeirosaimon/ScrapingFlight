@@ -14,7 +14,7 @@ class ScrapingFlight:
         soup = BeautifulSoup(self.response.content, 'html.parser')
         script = soup.find_all('script')[8].text.split('"jsonData"')
         return json.loads(script[1].split('"fareSelectorType"')[
-            0][2:-2])
+                              0][2:-2])
 
     def get_json_travel_info(self, oneway=False):
         try:
@@ -25,7 +25,7 @@ class ScrapingFlight:
                               ['name']: jsonInfos['origin']['code']}
             info['destination'] = {jsonInfos['destination']
                                    ['name']: jsonInfos['destination']['code']}
-            info['month'] = StringTreatment().month_treatment(
+            info['travelAt'] = StringTreatment().month_treatment(
                 jsonData['cheapestMonth'])
             if oneway:
                 info['travel'] = 'oneway'
@@ -39,7 +39,7 @@ class ScrapingFlight:
                     jsonData['fastestReturn'])
             info['price'] = int(jsonData['cheapestPrice'].replace(
                 'R$', '').replace('.', '').replace(',', '.').strip(' '))
-            info['airlines'] = [jsonData['airlinesNames'].split(',')]
+            info['airlines'] = jsonData['airlinesNames'].split(',')
             return info
         except:
             info['price'] = 0

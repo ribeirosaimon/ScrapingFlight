@@ -1,3 +1,6 @@
+import datetime
+
+
 class StringTreatment:
 
     def time_treatment(self, time):
@@ -42,4 +45,4 @@ class StringTreatment:
         elif month_string == "dezembro":
             month = 12
 
-        return f"{month}-{time_list[1]}"
+        return f"{time_list[1]}-{month}-01"
