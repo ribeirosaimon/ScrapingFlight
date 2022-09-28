@@ -4,8 +4,11 @@ from Model.Repository import ConectDb
 
 app = Flask(__name__)
 
+
 @app.route("/")
 def getFlightScraping():
+    ConectDb().changeconfiguration(True)
     result = CalculatorTravel().best_price()
     ConectDb().addDocument(**result)
-    return "OK"
+    if 1 == ConectDb().changeconfiguration(False):
+        return "ok"
