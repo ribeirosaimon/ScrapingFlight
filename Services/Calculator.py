@@ -1,3 +1,5 @@
+import datetime
+
 from Services.ulrs import CreateUrls
 from Services.Scraping import ScrapingFlight
 
@@ -25,8 +27,10 @@ class CalculatorTravel:
         best_oneway = self.oneway_travel()
         best_roundtrip = self.complet_travel()
         if best_roundtrip['price'] <= best_oneway['price']:
+            best_roundtrip['createdAt'] = datetime.datetime.today()
             return best_roundtrip
         else:
+            best_oneway['createdAt'] = datetime.datetime.today()
             return best_oneway
 
     def oneway_travel(self):

@@ -1,14 +1,17 @@
+import json
+
+import flask
 from flask import Flask
+from flask_cors import CORS
+
 from Services.Calculator import CalculatorTravel
 from Model.Repository import ConectDb
 
 app = Flask(__name__)
-
+cors = CORS(app, resources={"/*": {"origins": "*"}})
 
 @app.route("/")
 def getFlightScraping():
-    ConectDb().changeconfiguration(True)
     result = CalculatorTravel().best_price()
     ConectDb().addDocument(**result)
-    if 1 == ConectDb().changeconfiguration(False):
-        return "ok"
+    return result
