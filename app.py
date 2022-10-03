@@ -12,6 +12,9 @@ cors = CORS(app, resources={"/*": {"origins": "*"}})
 
 @app.route("/")
 def getFlightScraping():
+    conn = ConectDb()
+    conn.changeconfiguration(True)
     result = CalculatorTravel().best_price()
-    ConectDb().addDocument(**result)
+    conn.addDocument(**result)
+    conn.changeconfiguration(False)
     return result
