@@ -21,10 +21,8 @@ class ScrapingFlight:
             info = {}
             jsonInfos = self._scraping()
             jsonData = jsonInfos['seoFaqParameters']
-            info['origin'] = {jsonInfos['origin']
-                              ['name']: jsonInfos['origin']['code']}
-            info['destination'] = {jsonInfos['destination']
-                                   ['name']: jsonInfos['destination']['code']}
+            info['origin'] = jsonInfos['origin']['code']
+            info['destination'] = jsonInfos['destination']['code']
             info['travelAt'] = StringTreatment().month_treatment(
                 jsonData['cheapestMonth'])
             if oneway:
